@@ -17,8 +17,8 @@ public class CLIClient {
         Cabinet cabinet = new Cabinet(
                 Material.THREE_QUARTER,
                 Material.QUARTER,
-                Double.parseDouble(cabinetHeight),
                 Double.parseDouble(cabinetWidth),
+                Double.parseDouble(cabinetHeight),
                 Double.parseDouble(cabinetDepth)
         );
 
@@ -27,6 +27,6 @@ public class CLIClient {
 }
 
 // Cabinet width
-// Cabinet box material thickness
-// Drawer material thickness
+// Cabinet box material getThickness
+// Drawer material getThickness
 // Drawer construction type (butt joint/other)
