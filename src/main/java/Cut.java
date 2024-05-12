@@ -91,15 +91,32 @@ public class Cut {
         return "Cut{ dimensions=" + dimensions + ", material=" + material + '}';
     }
 
+    /**
+     * Object representation of two dimensions, for example width x height
+     */
     static class Dimensions {
         private final double first;
         private final double second;
 
+        /**
+         * Creates a Dimensions object. The measurements are interchangeable. For instance,
+         * first=4.0 and second=3.0 is the same as first=3.0 and second=4.0
+         *
+         * @param first  the first measurement
+         * @param second the second measurement
+         */
         public Dimensions(double first, double second) {
             this.first = first;
             this.second = second;
         }
 
+        /**
+         * Overrides Object equals such that provided measurement order is interchangeable. For
+         * example, <code>Dimensions(4.0. 3.0).equals(Dimensions(3.0, 4.0)</code>
+         *
+         * @param o the Dimensions object being compared to
+         * @return true if Dimensions are logically equivalent
+         */
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
