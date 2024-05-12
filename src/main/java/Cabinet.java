@@ -1,3 +1,5 @@
+import org.assertj.core.util.Preconditions;
+
 /**
  * A <code>Cabinet</code> is a storage system with three-dimensional measurements: width, height,
  * and depth. The real cabinet construction is generated from the provided dimensions. The
@@ -47,11 +49,25 @@ public class Cabinet {
      *                     of the front of the cabinet
      */
     public Cabinet(Material sideMaterial, Material backMaterial, double width, double height,
-            double depth) {
+            double depth) throws IllegalArgumentException {
+        Preconditions.checkArgument(width > sideMaterial.getThickness() * 2,
+                "Expected Cabinet width greater than 2x side material thickness, %.4f, but " +
+                        "received %.4f",
+                sideMaterial.getThickness() * 2, width);
+
+        Preconditions.checkArgument(height > sideMaterial.getThickness() * 2,
+                "Expected Cabinet height greater than 2x side material thickness, %.4f, but " +
+                        "received %.4f",
+                sideMaterial.getThickness() * 2, height);
+
+        Preconditions.checkArgument(
+                depth > sideMaterial.getThickness() + backMaterial.getThickness(),
+                "Expected Cabinet depth greater than side material thickness plus back material " + "thickness, %.4f, but received %.4f",
+                sideMaterial.getThickness() + backMaterial.getThickness(), depth);
+
         this.width = width;
         this.height = height;
         this.depth = depth;
-
         this.side = new Cut(height, depth, sideMaterial);
         this.bottom = Cut.withOneJoinedDimension(width,
                 new Joint(sideMaterial, Joint.JointType.DADO), depth, sideMaterial);

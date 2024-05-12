@@ -155,4 +155,58 @@ class CabinetTest implements WithAssertions {
                     new Cut.Dimensions(20, 9.5));
         }
     }
+
+    @Nested
+    class CabinetValidationTest {
+
+        @Test
+        void testCabinetCanNotHaveNegativeWidth() {
+            assertThatIllegalArgumentException().isThrownBy(
+                    () -> new Cabinet(Material.THREE_QUARTER, Material.QUARTER, -1.0, 6.0,
+                            6.0)).withMessageContaining(
+                    "Expected Cabinet width greater than 2x side material thickness, 1.5000, but" + " received -1.0000");
+        }
+
+        @Test
+        void testCabinetWidthMustBeGreaterThanDoubleSideMaterial() {
+            assertThatIllegalArgumentException().isThrownBy(
+                    () -> new Cabinet(Material.HALF, Material.QUARTER, 1.0, 6.0,
+                            6.0)).withMessageContaining(
+                    "Expected Cabinet width greater than 2x side material thickness, 1.0000, but" + " received 1.0000");
+        }
+
+        @Test
+        void testCabinetCanNotHaveNegativeHeight() {
+            assertThatIllegalArgumentException().isThrownBy(
+                    () -> new Cabinet(Material.THREE_QUARTER, Material.QUARTER, -1.0, 6.0,
+                            6.0)).withMessageContaining(
+                    "Expected Cabinet width greater than 2x side material thickness, 1.5000, but" + " received -1.0000");
+        }
+
+        @Test
+        void testCabinetHeightMustBeGreaterThanDoubleSideMaterial() {
+            assertThatIllegalArgumentException().isThrownBy(
+                    () -> new Cabinet(Material.QUARTER, Material.QUARTER, 10.0, 0.3,
+                            6.0)).withMessageContaining(
+                    "Expected Cabinet height greater than 2x side material thickness, 0.5000, " + "but" + " received 0.3000");
+        }
+
+        @Test
+        void testCabinetCanNotHaveNegativeDepth() {
+            assertThatIllegalArgumentException().isThrownBy(
+                    () -> new Cabinet(Material.THREE_QUARTER, Material.QUARTER, 10.0, 6.0,
+                            -1.0)).withMessageContaining(
+                    "Expected Cabinet depth greater than side material thickness plus back " +
+                            "material thickness, 1.0000, but received -1.0000");
+        }
+
+        @Test
+        void testCabinetDepthMustBeGreaterThanSideMaterialPlusBackMaterial() {
+            assertThatIllegalArgumentException().isThrownBy(
+                    () -> new Cabinet(Material.THREE_QUARTER, Material.QUARTER, 10.0, 6.0,
+                            0.75)).withMessageContaining(
+                    "Expected Cabinet depth greater than side material thickness plus back " +
+                            "material thickness, 1.0000, but received 0.7500");
+        }
+    }
 }
