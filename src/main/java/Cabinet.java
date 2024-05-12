@@ -62,6 +62,18 @@ public class Cabinet {
                 new Joint(sideMaterial, Joint.JointType.BUTT), 3, sideMaterial);
     }
 
+    public Cut getSide() {
+        return side;
+    }
+
+    public Cut getBack() {
+        return back;
+    }
+
+    public Cut getBottom() {
+        return bottom;
+    }
+
     public Cut getRunner() {
         return runner;
     }
@@ -69,7 +81,7 @@ public class Cabinet {
     @Override
     public String toString() {
         return String.format(
-                "Cabinet{dimensions=%sx%sx%sm WxHxD\nside=%s\nbottom=%s\nback=%s\nrunner=%s}",
+                "Cabinet{dimensions=%sx%sx%s WxHxD\nside=%s\nbottom=%s\nback=%s\nrunner=%s}",
                 this.width, this.height, this.depth, this.side, this.bottom, this.back,
                 this.runner);
     }
