@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * A <code>Cut</code> is a representation of work done in woodworking to make a material piece
  * smaller. For example, cutting down a sheet of plywood into panels that can be joined together
@@ -6,10 +8,8 @@
  * @author Craig Marker
  */
 public class Cut {
-    private final double firstDimension;
-    private final double secondDimension;
+    private final Dimensions dimensions;
     private final Material material;
-    private final String name;
 
     /**
      * Creates a basic <code>Cut</code>
@@ -17,15 +17,11 @@ public class Cut {
      * @param firstDimension  The first dimension measurement
      * @param secondDimension The second dimension measurement
      * @param material        The material to be used in the <code>Cut</code>
-     * @param name            The name of the <code>Cut</code>. This can help organize work
-     *                        when there are multiple <code>Cut</code>s
      * @return a <code>Cut</code>
      */
-    public Cut(double firstDimension, double secondDimension, Material material, String name) {
-        this.firstDimension = firstDimension;
-        this.secondDimension = secondDimension;
+    public Cut(double firstDimension, double secondDimension, Material material) {
+        this.dimensions = new Dimensions(firstDimension, secondDimension);
         this.material = material;
-        this.name = name;
     }
 
     /**
@@ -43,19 +39,12 @@ public class Cut {
      * @param unJoinedDimension The unjoined dimension measurement. This will be returned as is
      *                          in the final <code>Cut</code> specification
      * @param material          The material to be used in the <code>Cut</code>
-     * @param name              The name of the <code>Cut</code>. This can help organize work
-     *                          when there are multiple <code>Cut</code>s
      * @return a <code>Cut</code> that has factored all joints in the final measurements
      */
     public static Cut withOneJoinedDimension(double joinedDimension, Joint joint,
-                                             double unJoinedDimension, Material material,
-                                             String name) {
-        return new Cut(
-                joinedDimension - joint.getJoinedDimensionOffset(),
-                unJoinedDimension,
-                material,
-                name
-        );
+            double unJoinedDimension, Material material) {
+        return new Cut(joinedDimension - joint.getJoinedDimensionOffset(), unJoinedDimension,
+                material);
     }
 
     /**
@@ -80,24 +69,56 @@ public class Cut {
      *                             <code>secondDimension</code> and produce the final
      *                             <code>Cut</code> measurement
      * @param material             The material to be used in the <code>Cut</code>
-     * @param name                 The name of the <code>Cut</code>. This can help organize work
-     *                             when there are multiple <code>Cut</code>s
      * @return a <code>Cut</code> that has factored all joints in the final measurements
      */
     public static Cut withTwoJoinedDimensions(double firstDimension, Joint firstDimensionJoint,
-                                              double secondDimension, Joint secondDimensionJoint,
-                                              Material material, String name) {
+            double secondDimension, Joint secondDimensionJoint, Material material) {
 
-        return new Cut(
-                firstDimension - firstDimensionJoint.getJoinedDimensionOffset(),
-                secondDimension - secondDimensionJoint.getJoinedDimensionOffset(),
-                material,
-                name
-        );
+        return new Cut(firstDimension - firstDimensionJoint.getJoinedDimensionOffset(),
+                secondDimension - secondDimensionJoint.getJoinedDimensionOffset(), material);
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public Dimensions getDimensions() {
+        return dimensions;
     }
 
     @Override
     public String toString() {
-        return "Cut{" + "name=" + name + ",  dimensions=" + firstDimension + "x" + secondDimension + ", material=" + material + '}';
+        return "Cut{ dimensions=" + dimensions + ", material=" + material + '}';
+    }
+
+    static class Dimensions {
+        private final double first;
+        private final double second;
+
+        public Dimensions(double first, double second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Dimensions)) return false;
+
+            Dimensions that = (Dimensions) o;
+            return Double.compare(first, that.first) == 0 && Double.compare(second,
+                    that.second) == 0 || Double.compare(first, that.second) == 0 && Double.compare(
+                    second, that.first) == 0;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(first, second);
+        }
+
+        @Override
+        public String toString() {
+            return "Dimensions{" + first + "x" + second + '}';
+        }
     }
 }
