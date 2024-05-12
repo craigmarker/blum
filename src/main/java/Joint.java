@@ -65,6 +65,7 @@ public class Joint {
          */
         SINGLE_SIDE_DADO(0.5);
 
+
         private final double outerMaterialMultiplier;
 
         /**
@@ -75,7 +76,12 @@ public class Joint {
          *                                multiplier would be 0.5. If this same overlap applies
          *                                to both sides of the joint, the multiplier would be 1.
          */
-        JointType(double outerMaterialMultiplier) {
+        JointType(double outerMaterialMultiplier) throws IllegalArgumentException {
+            if (outerMaterialMultiplier < 0.0) {
+                throw new IllegalArgumentException(
+                        "JointType material multipliers must be positive");
+            }
+
             this.outerMaterialMultiplier = outerMaterialMultiplier;
         }
 
