@@ -19,9 +19,22 @@ public class Cut {
      * @param material        The material to be used in the <code>Cut</code>
      * @return a <code>Cut</code>
      */
-    public Cut(double firstDimension, double secondDimension, Material material) {
-        this.dimensions = new Dimensions(firstDimension, secondDimension);
+    private Cut(double firstDimension, double secondDimension, Material material) {
+        this.dimensions = Dimensions.valueOf(firstDimension, secondDimension);
         this.material = material;
+    }
+
+    /**
+     * Creates a <code>Cut</code> whose dimensions are not joined with another piece of wood
+     *
+     * @param firstDimension  The first dimension measurement
+     * @param secondDimension The second dimension measurement
+     * @param material        The material to be used in the <code>Cut</code>
+     * @return a <code>Cut</code>
+     */
+    public static Cut withNoJoinedDimensions(double firstDimension, double secondDimension,
+            Material material) {
+        return new Cut(firstDimension, secondDimension, material);
     }
 
     /**
@@ -105,9 +118,23 @@ public class Cut {
          * @param first  the first measurement
          * @param second the second measurement
          */
-        public Dimensions(double first, double second) {
+        private Dimensions(double first, double second) {
             this.first = first;
             this.second = second;
+        }
+
+        /**
+         * Creates a Dimensions object. The measurements are interchangeable. For instance,
+         * first=4.0 and second=3.0 is the same as first=3.0 and second=4.0
+         *
+         * @param first  the first measurement
+         * @param second the second measurement
+         * @return A <code>Dimensions</code> object with <code>first</code> and
+         * <code>second</code> as its measurements
+         */
+        public static Dimensions valueOf(double first, double second) {
+            return new Dimensions(first, second);
+
         }
 
         /**

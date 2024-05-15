@@ -21,9 +21,22 @@ public class Joint {
      * @param type             The <code>JointType</code> used to connect a workpiece to the
      *                         <code>materialJoinedTo</code>
      */
-    public Joint(Material materialJoinedTo, JointType type) {
+    private Joint(Material materialJoinedTo, JointType type) {
         this.materialJoinedTo = materialJoinedTo;
         this.type = type;
+    }
+
+    /**
+     * Creates a new <code>Joint</code>
+     *
+     * @param materialJoinedTo The <code>Material</code> that is joined to. This material's
+     *                         thickness contributes to the cut measurement that will be made for
+     *                         this joint
+     * @param type             The <code>JointType</code> used to connect a workpiece to the
+     *                         <code>materialJoinedTo</code>
+     */
+    public static Joint create(Material materialJoinedTo, JointType type) {
+        return new Joint(materialJoinedTo, type);
     }
 
     /**

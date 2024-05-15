@@ -25,25 +25,25 @@ class CabinetTest implements WithAssertions {
         @Test
         void testRunnerSizeUsesCabinetWidth() {
             assertThat(largeCabinet.getRunner().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(22.5, 3));
+                    Cut.Dimensions.valueOf(22.5, 3));
         }
 
         @Test
         void testSideSizeEqualToCabinetHeightDepth() {
             assertThat(largeCabinet.getSide().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(30.5, 18));
+                    Cut.Dimensions.valueOf(30.5, 18));
         }
 
         @Test
         void testBackSizeUsesCabinetHeightWidth() {
             assertThat(largeCabinet.getBack().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(30.125, 23.25));
+                    Cut.Dimensions.valueOf(30.125, 23.25));
         }
 
         @Test
         void testBottomSizeUsesCabinetWidthDepth() {
             assertThat(largeCabinet.getBottom().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(18, 23.25));
+                    Cut.Dimensions.valueOf(18, 23.25));
         }
 
         @Nested
@@ -95,24 +95,25 @@ class CabinetTest implements WithAssertions {
         @Test
         void testRunnerSizeUsesCabinetWidth() {
             assertThat(smallCabinet.getRunner().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(4.5, 3));
+                    Cut.Dimensions.valueOf(4.5, 3));
         }
 
         @Test
         void testSideSizeEqualToCabinetHeightDepth() {
-            assertThat(smallCabinet.getSide().getDimensions()).isEqualTo(new Cut.Dimensions(6, 10));
+            assertThat(smallCabinet.getSide().getDimensions()).isEqualTo(
+                    Cut.Dimensions.valueOf(6, 10));
         }
 
         @Test
         void testBackSizeUsesCabinetHeightWidth() {
             assertThat(smallCabinet.getBack().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(5.25, 5.625));
+                    Cut.Dimensions.valueOf(5.25, 5.625));
         }
 
         @Test
         void testBottomSizeUsesCabinetWidthDepth() {
             assertThat(smallCabinet.getBottom().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(5.25, 10));
+                    Cut.Dimensions.valueOf(5.25, 10));
         }
     }
 
@@ -129,7 +130,7 @@ class CabinetTest implements WithAssertions {
         @Test
         void testRunnerSizeUsesCabinetWidth() {
             assertThat(this.halfInchCabinet.getRunner().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(9, 3));
+                    Cut.Dimensions.valueOf(9, 3));
         }
 
         @Test
@@ -140,19 +141,19 @@ class CabinetTest implements WithAssertions {
         @Test
         void testSideSizeEqualToCabinetHeightDepth() {
             assertThat(halfInchCabinet.getSide().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(10.5, 20));
+                    Cut.Dimensions.valueOf(10.5, 20));
         }
 
         @Test
         void testBackSizeUsesCabinetHeightWidth() {
             assertThat(halfInchCabinet.getBack().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(9.5, 10.25));
+                    Cut.Dimensions.valueOf(9.5, 10.25));
         }
 
         @Test
         void testBottomSizeUsesCabinetWidthDepth() {
             assertThat(halfInchCabinet.getBottom().getDimensions()).isEqualTo(
-                    new Cut.Dimensions(20, 9.5));
+                    Cut.Dimensions.valueOf(20, 9.5));
         }
     }
 

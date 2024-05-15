@@ -68,14 +68,14 @@ public class Cabinet {
         this.width = width;
         this.height = height;
         this.depth = depth;
-        this.side = new Cut(height, depth, sideMaterial);
+        this.side = Cut.withNoJoinedDimensions(height, depth, sideMaterial);
         this.bottom = Cut.withOneJoinedDimension(width,
-                new Joint(sideMaterial, Joint.JointType.DADO), depth, sideMaterial);
+                Joint.create(sideMaterial, Joint.JointType.DADO), depth, sideMaterial);
         this.back = Cut.withTwoJoinedDimensions(width,
-                new Joint(sideMaterial, Joint.JointType.DADO), height,
-                new Joint(sideMaterial, Joint.JointType.SINGLE_SIDE_DADO), backMaterial);
+                Joint.create(sideMaterial, Joint.JointType.DADO), height,
+                Joint.create(sideMaterial, Joint.JointType.SINGLE_SIDE_DADO), backMaterial);
         this.runner = Cut.withOneJoinedDimension(width,
-                new Joint(sideMaterial, Joint.JointType.BUTT), 3, sideMaterial);
+                Joint.create(sideMaterial, Joint.JointType.BUTT), 3, sideMaterial);
     }
 
     public Cut getSide() {
