@@ -1,0 +1,9 @@
+- sku: 7694570M
+  max_load: 170
+  min_drawer_side_thickness: 0.5
+  max_drawer_side_thickness: 0.625
+  drawer_length: 18
+  min_cabinet_depth: 18.8125
+  min_top_clearance: 0.28125
+  bottom_clearance: 0.625
+  interior_offset: 0.8125
