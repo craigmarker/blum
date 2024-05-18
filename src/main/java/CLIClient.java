@@ -1,19 +1,24 @@
-import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class for constructing a cabinet with user command line input
+ */
 public class CLIClient {
 
-    public static void main(String[] args) throws IOException {
-        /** Reading RunnerConfiguration and printing, TODO add back and use for drawer construction
-         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-         List<RunnerConfiguration> runners = Arrays.asList(
-         mapper.readValue(new File("src/main/resources/blum_runners.yaml"),
-         RunnerConfiguration[].class));
-         System.out.println(runners);
-         */
+    private final Scanner scanner;
 
-        Scanner scanner = new Scanner(System.in);
+    public CLIClient() {
+        scanner = new Scanner(System.in);
+    }
 
+    /**
+     * Uses user input for cabinet dimensions to construct a <code>CabinetBox</code>. This
+     * <code>CabinetBox</code> can then be filled with various storage mechanisms like shelves
+     * and drawers
+     *
+     * @return <code>CabinetBox</code> with user-provided dimensions
+     */
+    public CabinetBox promptScaffoldCabinet() {
         System.out.println("How wide is your cabinet?");
         String cabinetWidth = scanner.nextLine();
 
@@ -23,15 +28,8 @@ public class CLIClient {
         System.out.println("How deep is your cabinet?");
         String cabinetDepth = scanner.nextLine();
 
-        CabinetBox cabinetBox = new CabinetBox(Material.THREE_QUARTER, Material.QUARTER,
+        return new CabinetBox(Material.THREE_QUARTER, Material.QUARTER,
                 Double.parseDouble(cabinetWidth), Double.parseDouble(cabinetHeight),
                 Double.parseDouble(cabinetDepth));
-
-        System.out.println("You created a cabinet box: " + cabinetBox);
     }
 }
-
-// Cabinet width
-// Cabinet box material getThickness
-// Drawer material getThickness
-// Drawer construction type (butt joint/other)
