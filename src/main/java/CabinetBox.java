@@ -1,22 +1,24 @@
 import org.assertj.core.util.Preconditions;
 
 /**
- * A <code>Cabinet</code> is a storage system with three-dimensional measurements: width, height,
- * and depth. The real cabinet construction is generated from the provided dimensions. The
- * cabinet construction follows Bent's Woodworking's method.
+ * A <code>CabinetBox</code> the container for a storage system with three-dimensional
+ * measurements: width, height, and depth. The cabinet box construction cuts are generated from the
+ * provided dimensions. The cabinet box construction follows Bent's Woodworking's method.
+ * Notably, a <code>CabinetBox</code> does not include any drawers, shelves, or internal storage
+ * mechanisms common to cabinets. These mechanisms are added separately.
  *
  * @author Craig Marker
  * @see
  * <a href="https://www.youtube.com/watch?v=KmM6DOy0aMc&ab_channel=Bent%27sWoodworking%26Mor">Bent's Woodworking cabinet construction guide</a>
  */
-public class Cabinet {
+public class CabinetBox {
     private final double width;
     private final double height;
     private final double depth;
 
     /**
      * The side panel that makes up the left and the right of a cabinet when looking at the front.
-     * Cabinet construction will require two sides of equal size
+     * CabinetBox construction will require two sides of equal size
      */
     private final Cut side;
 
@@ -34,8 +36,8 @@ public class Cabinet {
     private final Cut runner;
 
     /**
-     * Constructs a <code>Cabinet</code> and the required cuts to build that cabinet in the real
-     * world
+     * Constructs a <code>CabinetBox</code> and the required cuts to build that cabinet box in
+     * the real world
      *
      * @param sideMaterial The <code>Material</code> that will be used to create the cabinet
      *                     sides <i>and</i> runners
@@ -48,26 +50,26 @@ public class Cabinet {
      *                     the cabinet from the outside of the back of the cabinet to the outside
      *                     of the front of the cabinet
      */
-    public Cabinet(Material sideMaterial, Material backMaterial, double width, double height,
+    public CabinetBox(Material sideMaterial, Material backMaterial, double width, double height,
             double depth) throws IllegalArgumentException {
         Preconditions.checkArgument(width > sideMaterial.getThickness() * 2,
-                "Expected Cabinet width greater than 2x side material thickness, %.4f, but " +
-                        "received %.4f",
+                "Expected CabinetBox width greater than 2x side material thickness, %.4f, but " + "received %.4f",
                 sideMaterial.getThickness() * 2, width);
 
         Preconditions.checkArgument(height > sideMaterial.getThickness() * 2,
-                "Expected Cabinet height greater than 2x side material thickness, %.4f, but " +
-                        "received %.4f",
+                "Expected CabinetBox height greater than 2x side material thickness, %.4f, but " + "received %.4f",
                 sideMaterial.getThickness() * 2, height);
 
         Preconditions.checkArgument(
                 depth > sideMaterial.getThickness() + backMaterial.getThickness(),
-                "Expected Cabinet depth greater than side material thickness plus back material " + "thickness, %.4f, but received %.4f",
+                "Expected CabinetBox depth greater than side material thickness plus back " +
+                        "material " + "thickness, %.4f, but received %.4f",
                 sideMaterial.getThickness() + backMaterial.getThickness(), depth);
 
         this.width = width;
         this.height = height;
         this.depth = depth;
+
         this.side = Cut.withNoJoinedDimensions(height, depth, sideMaterial);
         this.bottom = Cut.withOneJoinedDimension(width,
                 Joint.create(sideMaterial, Joint.JointType.DADO), depth, sideMaterial);
@@ -97,7 +99,7 @@ public class Cabinet {
     @Override
     public String toString() {
         return String.format(
-                "Cabinet{dimensions=%sx%sx%s WxHxD\nside=%s\nbottom=%s\nback=%s\nrunner=%s}",
+                "CabinetBox{dimensions=%sx%sx%s WxHxD\nside=%s\nbottom=%s\nback=%s\nrunner=%s}",
                 this.width, this.height, this.depth, this.side, this.bottom, this.back,
                 this.runner);
     }

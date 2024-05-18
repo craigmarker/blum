@@ -12,7 +12,7 @@ How tall is your cabinet?
 34.5
 How deep is your cabinet?
 21.75
-You created a cabinet: Cabinet{dimensions=15.75x34.5x21.75m WxHxD
+You created a cabinet: CabinetBox{dimensions=15.75x34.5x21.75m WxHxD
 side=Cut{ dimensions=Dimensions{34.5x21.75}, material=Material{THREE_QUARTER}}
 bottom=Cut{ dimensions=Dimensions{15.0x21.75}, material=Material{THREE_QUARTER}}
 back=Cut{ dimensions=Dimensions{15.0x34.125}, material=Material{QUARTER}}

@@ -23,11 +23,11 @@ public class CLIClient {
         System.out.println("How deep is your cabinet?");
         String cabinetDepth = scanner.nextLine();
 
-        Cabinet cabinet = new Cabinet(Material.THREE_QUARTER, Material.QUARTER,
+        CabinetBox cabinetBox = new CabinetBox(Material.THREE_QUARTER, Material.QUARTER,
                 Double.parseDouble(cabinetWidth), Double.parseDouble(cabinetHeight),
                 Double.parseDouble(cabinetDepth));
 
-        System.out.println("You created a cabinet: " + cabinet);
+        System.out.println("You created a cabinet box: " + cabinetBox);
     }
 }
 
