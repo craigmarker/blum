@@ -1,3 +1,5 @@
+import com.google.common.collect.ImmutableList;
+
 import java.util.Scanner;
 
 /**
@@ -31,5 +33,22 @@ public class CLIClient {
         return new CabinetBox(Material.THREE_QUARTER, Material.QUARTER,
                 Double.parseDouble(cabinetWidth), Double.parseDouble(cabinetHeight),
                 Double.parseDouble(cabinetDepth));
+    }
+
+    public Cabinet promptBuildStorage(Cabinet cabinet) {
+        System.out.println("How wide is your storage?");
+        String storageWidth = scanner.nextLine();
+
+        System.out.println("How tall is your storage?");
+        String storageHeight = scanner.nextLine();
+
+        System.out.println("How deep is your storage?");
+        String storageDepth = scanner.nextLine();
+
+        CabinetStorage drawer = Drawer.construct(Double.parseDouble(storageWidth),
+                Double.parseDouble(storageDepth), Double.parseDouble(storageHeight));
+        ImmutableList<CabinetStorage> storage = new ImmutableList.Builder<CabinetStorage>().addAll(
+                cabinet.getStorage()).add(drawer).build();
+        return Cabinet.withStorage(cabinet.getBox(), storage);
     }
 }
